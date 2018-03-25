@@ -6,7 +6,7 @@
 
 
 
-A simple app to explore repos by language for any given account
+# A simple app to explore repos by language for any given account
 
 The app uses the GitHub API endpoint: api.github.com/users/user/repos to pull down data on a given user's repos. It fetches data recursively for accounts with more than 30 repos.
 
