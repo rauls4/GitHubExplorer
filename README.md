@@ -1,4 +1,4 @@
-# GitHubExplorer
+# GitHub Explorer
 
 ![alt text](https://i.imgur.com/hgJY2cm.png)![alt text](https://i.imgur.com/2ilwsNO.png)
 
