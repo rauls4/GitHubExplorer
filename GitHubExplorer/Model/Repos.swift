@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import UIKit
 
 class Repos {
     private let clientID = "71eecc10419c6ee246cb"                           //Github severly limits results w/o authentication
     private let clientSecret = "34b5b1be187f75ee86cab9f817185f8ea941e0fe"
     private var languageSet = Set<String>()                                 //So we can log one entry per language found
-     var langTupleArray = [(key: String, value: Int)]()                     //So we can sort by instance count
-     var combinedData = [Repos.gitHubResults]()                             //Holds the combined data for all pages
+    var langTupleArray = [(key: String, value: Int)]()                      //So we can sort by instance count
+    var combinedData = [Repos.gitHubResults]()                              //Holds the combined data for all pages
     private var pages = 1                                                   //Used in the recursive queries to get all records
     private let resultsPerPage = 30                                         //Chunks of repos data results per Github query
     

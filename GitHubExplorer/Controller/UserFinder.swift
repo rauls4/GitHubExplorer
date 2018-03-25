@@ -13,7 +13,7 @@ class UserFinder: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!                      //To indicate loading in progress
     @IBOutlet weak var tableView: UITableView!
     
-    let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,7 +32,7 @@ class UserFinder: UIViewController, UITableViewDataSource, UITableViewDelegate {
         definesPresentationContext = true
     }
     
-    func searchBarIsEmpty() -> Bool {
+    private func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
@@ -56,21 +56,7 @@ class UserFinder: UIViewController, UITableViewDataSource, UITableViewDelegate {
         reposViewer.repos = reposByLanguage.sorted(by: { $0.stars > $1.stars })
         self.navigationController?.pushViewController(reposViewer, animated: true)
     }
-    
-    func matches(for regex: String, in text: String) -> [String] {
-        
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
+
 }
 
 extension UserFinder: UISearchResultsUpdating {
