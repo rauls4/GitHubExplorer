@@ -6,7 +6,7 @@
 
 
 
-A simple app to explore repos by language for any given account
+# A simple app to explore repos by language for any given account
 
 The app uses the GitHub API endpoint: api.github.com/users/user/repos to pull down data on a given user's repos. It fetches data recursively for accounts with more than 30 repos.
 
@@ -16,4 +16,4 @@ The model creates a set of each occurance of a language on the account's repos a
 
 Basic repo data is serialized using a codable struct which can be used to display more details about each repo.
 
-The project uses no third party libraries or frameworks.
+The project uses no third party libraries or frameworks. It was written in Swift 4.
