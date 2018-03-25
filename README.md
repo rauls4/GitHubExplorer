@@ -16,4 +16,4 @@ The model creates a set of each occurance of a language on the account's repos a
 
 Basic repo data is serialized using a codable struct which can be used to display more details about each repo.
 
-The project uses no third party libraries or frameworks.
+The project uses no third party libraries or frameworks. It was written in Swift 4.
