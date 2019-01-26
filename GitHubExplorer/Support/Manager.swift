@@ -9,12 +9,11 @@
 import Foundation
 
 final class Manager {               //Singleton
-    private init() {
-    }
+
     let repos = Repos()
     static let shared = Manager()
     
-    var usersData = [String:[Repos.gitHubResults]]()
+    var usersData = [String:[Repos.GitHubResults]]()
     
     class func stringToDate(string:String) -> Date{
         let dateFormatter = DateFormatter()

@@ -13,18 +13,19 @@ class Repos {
     private let clientSecret = "34b5b1be187f75ee86cab9f817185f8ea941e0fe"
     private var languageSet = Set<String>()                                 //So we can log one entry per language found
     var langTupleArray = [(key: String, value: Int)]()                      //So we can sort by instance count
-    var combinedData = [Repos.gitHubResults]()                              //Holds the combined data for all pages
+    var combinedData = [Repos.GitHubResults]()                              //Holds the combined data for all pages
     private var pages = 1                                                   //Used in the recursive queries to get all records
     private let resultsPerPage = 30                                         //Chunks of repos data results per Github query
     
     //Codable to serialize the GitHub results into useful stuff
-    struct gitHubResults: Codable {
+    struct GitHubResults: Codable {
         let language:String?
         let stars:Int
         let forks:Int?
         let name:String?
         let description:String?
         let date:String?
+        
         private enum CodingKeys: String, CodingKey {
             case name = "name"
             case language = "language"
@@ -37,14 +38,14 @@ class Repos {
     
     func clearData(){                                                       //When we do a new search, let's clean the slate
         pages = 1                                                           //Back to page 1
-        combinedData = [Repos.gitHubResults]()                              //Wipe all combined query data results
+        combinedData = [Repos.GitHubResults]()                              //Wipe all combined query data results
         languageSet = Set<String>()                                         //Clear our set of languages
         langTupleArray = [(key: String, value: Int)]()                      //Clear our tupple array of sorted languages (by how many repoes use it)
     }
 
     private func loadPage(user:String, completion:@escaping (Bool) -> Void){  //Github results one page at a time
         
-        var gitData:[Repos.gitHubResults]!
+        var gitData:[Repos.GitHubResults]!
         
         guard let gitUrl =
             URL(string: "https://api.github.com/users/\(user)/repos?client_id=\(clientID)&client_secret=\(clientSecret)&page=\(pages)&per_page=\(resultsPerPage)") else {return}
@@ -54,7 +55,7 @@ class Repos {
             guard let data = data else { return }
             do {
                 let decoder = JSONDecoder()
-                gitData = try decoder.decode([gitHubResults].self, from: data)
+                gitData = try decoder.decode([GitHubResults].self, from: data)
                 self.combinedData = self.combinedData + gitData                //Let's add these results to any previous pages
             } catch {
                 self.clearData()

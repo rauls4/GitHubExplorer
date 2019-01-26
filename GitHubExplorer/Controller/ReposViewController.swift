@@ -13,7 +13,7 @@ class ReposViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     
     var language:String?
-    var repos: [Repos.gitHubResults]?
+    var repos: [Repos.GitHubResults]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

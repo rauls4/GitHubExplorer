@@ -13,7 +13,7 @@ class UserFinder: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!                      //To indicate loading in progress
     @IBOutlet weak var tableView: UITableView!
     
-    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchController:UISearchController?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,16 +24,17 @@ class UserFinder: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController = UISearchController(searchResultsController: nil)
         self.activityIndicator.stopAnimating()
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for a GitHub account"
+        searchController?.searchResultsUpdater = self
+        searchController?.obscuresBackgroundDuringPresentation = false
+        searchController?.searchBar.placeholder = "Search for a GitHub account"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
     private func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
+        return searchController?.searchBar.text?.isEmpty ?? true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,7 +67,7 @@ extension UserFinder: UISearchResultsUpdating {
             self.tableView.reloadData()
         }else{
             self.activityIndicator.startAnimating()
-            Manager.shared.repos.search(term: searchController.searchBar.text!,completion: { _ in
+            Manager.shared.repos.search(term: searchController.searchBar.text!,completion: {[unowned self] _ in
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.tableView.reloadData()
